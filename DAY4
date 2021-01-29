@@ -1,0 +1,50 @@
+Number of minimum picks to get ‘k’ pairs of socks from a drawer (Asked in Amazon)
+Level-Medium
+A drawer contains socks of n different colours. The number of socks available of ith colour is given by a[i] where a is an array of n elements. Tony wants to take k pairs of socks out of the drawer. However, he cannot see the colour of the sock that he is picking. You have to tell what is the minimum number of socks Tony has to pick in one attempt from the drawer such that he can be absolutely sure, without seeing their colours, that he will have at least k matching pairs.
+
+Example-1:
+Input:
+N = 4, K = 6
+a[] = {3, 4, 5, 3}
+Output: 15
+Explanation: 
+All 15 socks have to be picked in order
+to obtain 6 pairs.
+
+Expected Time Complexity: O(N)
+
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 ≤ N ≤ 10⁵
+1 ≤ a[i] ≤ 10⁶
+
+SOLUTION CODE:-
+
+class Solution {
+  public int find_min(int[] a, int n, int k) {
+    // code here.
+    int opt=0;
+    int ans=-1;
+    int possible=0;
+    for(int i : a){
+      possible+=(i/2);
+
+      if(i%2==0){
+        opt+=(i-2)/2;
+      }else{
+        opt+=(i-1)/2;
+      }
+    }
+    if(possible<k){
+     return ans;
+    }
+  if(k<=opt){
+      ans=2*(k-1)+n+1;
+  }
+  else{
+  ans=2*opt+n+k-opt;
+    }
+  return ans;
+  }
+}
