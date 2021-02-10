@@ -1,0 +1,47 @@
+Restrictive Candy Crush (Level-Medium)
+Company Tag- AMAZON!
+Given a string S and an integer K, the task is to reduce the string by applying the following operation:
+Choose a group of K consecutive identical characters and remove them. The operation can be performed any number of times until it is no longer possible.
+Example 1:
+Input:
+K = 2
+S = "geeksforgeeks"
+Output:
+gksforgks
+Explanation:
+Modified String after each step: 
+"geegsforgeeks" -> "gksforgks"
+Expected Time Complexity: O(|S|)
+Expected Auxiliary Space: O(|S|)
+Constraints:
+1 ≤ |S| ≤ 10⁵
+1 ≤ K ≤ |S|
+Solution Code:-
+class Solution{
+public:
+string Reduced_String(int k,string s){
+// Your code goes here
+string ans = “”;
+stack < pair<char, int> > st;
+int n = s.size();
+for(int i = 0; i <= n;){
+char x = s[i];
+if(!st.empty() && st.top().second == k)st.pop();
+if(i == n)break;
+if(st.empty() || st.top().first != x){
+st.push({x, 1});
+i++;
+} else {
+st.top().second++;
+i++;
+}
+}
+while(!st.empty()){
+pair <char, int> temp = st.top();
+while(temp.second — ) ans += temp.first;
+st.pop();
+}
+reverse(ans.begin(), ans.end());
+return ans;
+}
+};
